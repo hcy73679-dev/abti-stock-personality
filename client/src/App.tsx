@@ -22,11 +22,12 @@ import {
 } from "./lib/abtiData";
 import Loading from "./pages/Loading";
 import NotFound from "./pages/NotFound";
+import PersonalityGallery from "./pages/PersonalityGallery";
 import Quiz from "./pages/Quiz";
 import Result from "./pages/Result";
 import Welcome from "./pages/Welcome";
 
-type AppPage = 'welcome' | 'quiz' | 'loading' | 'result';
+type AppPage = 'welcome' | 'quiz' | 'loading' | 'result' | 'gallery';
 
 function AppContent() {
   const [page, setPage] = useState<AppPage>('welcome');
@@ -75,6 +76,10 @@ function AppContent() {
     setPendingAnswers({});
   };
 
+  const handleViewGallery = () => {
+    setPage('gallery');
+  };
+
   return (
     <AnimatePresence mode="wait">
       {page === 'welcome' && (
@@ -85,7 +90,7 @@ function AppContent() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <Welcome onStart={handleStart} />
+          <Welcome onStart={handleStart} onViewGallery={handleViewGallery} />
         </motion.div>
       )}
       
@@ -130,6 +135,18 @@ function AppContent() {
             onRetake={handleRetake}
             onHome={handleHome}
           />
+        </motion.div>
+      )}
+
+      {page === 'gallery' && (
+        <motion.div
+          key="gallery"
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 40 }}
+          transition={{ duration: 0.3 }}
+        >
+          <PersonalityGallery onBack={handleHome} />
         </motion.div>
       )}
     </AnimatePresence>

@@ -34,9 +34,10 @@ const TICKER_ITEMS = [
 
 interface WelcomeProps {
   onStart: () => void;
+  onViewGallery: () => void;
 }
 
-export default function Welcome({ onStart }: WelcomeProps) {
+export default function Welcome({ onStart, onViewGallery }: WelcomeProps) {
   const tickerContent = [...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS].join('   ·   ');
 
   return (
@@ -176,11 +177,19 @@ export default function Welcome({ onStart }: WelcomeProps) {
 
             {/* Personality type preview */}
             <div className="border-2 border-[oklch(0.15_0.02_30)] p-6 bg-white">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="h-5 w-1.5 bg-[oklch(0.45_0.22_25)]" />
-                <h4 className="font-bold text-lg text-[oklch(0.15_0.02_30)]" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  16种大A人格预览
-                </h4>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="h-5 w-1.5 bg-[oklch(0.45_0.22_25)]" />
+                  <h4 className="font-bold text-lg text-[oklch(0.15_0.02_30)]" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    16种大A人格预览
+                  </h4>
+                </div>
+                <button
+                  onClick={onViewGallery}
+                  className="text-xs font-mono text-[oklch(0.45_0.22_25)] hover:text-[oklch(0.35_0.22_25)] transition-colors"
+                >
+                  查看全部 →
+                </button>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {[
@@ -232,19 +241,34 @@ export default function Welcome({ onStart }: WelcomeProps) {
                 </span>
                 <TrendingDown className="w-6 h-6 text-[oklch(0.35_0.12_160)]" />
               </div>
-              <motion.button
-                onClick={onStart}
-                className="group inline-flex items-center gap-3 bg-[oklch(0.15_0.02_30)] hover:bg-[oklch(0.25_0.02_30)] text-[oklch(0.96_0.02_85)] font-bold text-base px-8 py-3 transition-all duration-200"
-                style={{ 
-                  boxShadow: '4px 4px 0 oklch(0.45 0.22 25)',
-                  fontFamily: "'Playfair Display', serif"
-                }}
-                whileHover={{ transform: 'translate(-2px, -2px)', boxShadow: '6px 6px 0 oklch(0.45 0.22 25)' }}
-                whileTap={{ transform: 'translate(0, 0)', boxShadow: '2px 2px 0 oklch(0.45 0.22 25)' }}
-              >
-                立即开始测试
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.button
+                  onClick={onStart}
+                  className="group inline-flex items-center justify-center gap-3 bg-[oklch(0.45_0.22_25)] hover:bg-[oklch(0.38_0.22_25)] text-white font-bold text-base px-8 py-3 transition-all duration-200"
+                  style={{ 
+                    boxShadow: '4px 4px 0 oklch(0.25 0.15 25)',
+                    fontFamily: "'Playfair Display', serif"
+                  }}
+                  whileHover={{ transform: 'translate(-2px, -2px)', boxShadow: '6px 6px 0 oklch(0.25 0.15 25)' }}
+                  whileTap={{ transform: 'translate(0, 0)', boxShadow: '2px 2px 0 oklch(0.25 0.15 25)' }}
+                >
+                  立即开始测试
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </motion.button>
+                
+                <motion.button
+                  onClick={onViewGallery}
+                  className="group inline-flex items-center justify-center gap-3 bg-[oklch(0.15_0.02_30)] hover:bg-[oklch(0.25_0.02_30)] text-[oklch(0.96_0.02_85)] font-bold text-base px-8 py-3 transition-all duration-200"
+                  style={{ 
+                    boxShadow: '4px 4px 0 oklch(0.45 0.22 25)',
+                    fontFamily: "'Playfair Display', serif"
+                  }}
+                  whileHover={{ transform: 'translate(-2px, -2px)', boxShadow: '6px 6px 0 oklch(0.45 0.22 25)' }}
+                  whileTap={{ transform: 'translate(0, 0)', boxShadow: '2px 2px 0 oklch(0.45 0.22 25)' }}
+                >
+                  📖 查看人格图鉴
+                </motion.button>
+              </div>
             </div>
           </div>
         </div>
